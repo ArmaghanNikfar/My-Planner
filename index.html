@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="blue">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>پنل شخصی من</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html[data-theme=pink]{--bg:#fff0f6;--tx:#3a1a2b;--mu:#8a6075;--ac:#e91e8c;--ac2:#ff6fb5;--bd:#f8c8dc;--b1:#ff8cc6;--b2:#ffc2e0;--b3:#c9a7ff;--red:#d92d4b}
+html[data-theme=blue]{--bg:#eef6fb;--tx:#10283d;--mu:#5f7a90;--ac:#0b84d8;--ac2:#19b5c9;--bd:#cfe3f1;--b1:#5ec4ff;--b2:#9be7f0;--b3:#8fb4ff;--red:#d92d4b}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:Vazirmatn,Tahoma,system-ui,sans-serif;line-height:1.8}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--bg);transition:background .6s}
+.bg i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;transition:background .6s;animation:dr 16s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:380px;height:380px;background:var(--b1);top:-80px;right:-60px}
+.bg i:nth-child(2){width:340px;height:340px;background:var(--b2);bottom:10%;left:-90px;animation-duration:21s}
+.bg i:nth-child(3){width:300px;height:300px;background:var(--b3);top:45%;right:20%;animation-duration:25s}
+@keyframes dr{to{transform:translate(60px,90px) scale(1.2)}}
+@keyframes en{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pp{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.04)}100%{transform:none;opacity:1}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.enter{animation:en .35s ease both}.pop{animation:pp .35s ease both}
+.out{opacity:0;transform:translateX(-30px);transition:.2s}
+.w{max-width:700px;margin:0 auto;padding:12px 14px 40px}
+.top{display:flex;align-items:center;justify-content:space-between}
+h1{font-size:1.35rem;margin:6px 0;color:var(--ac)}
+h3{margin:0;font-size:1rem}
+.card{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--bd);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+button,select,input{font:inherit;color:var(--tx);background:#fff;border:1px solid var(--bd);border-radius:12px;padding:6px 10px}
+button{cursor:pointer;transition:transform .12s}button:active{transform:scale(.93)}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:10px 0}
+.nv{touch-action:none;user-select:none;-webkit-user-select:none}
+.on{background:linear-gradient(135deg,var(--ac),var(--ac2))!important;color:#fff!important;border-color:transparent!important;font-weight:700}
+.add{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.add input[type=text]{flex:1;min-width:130px}
+.dot{width:26px;height:26px;border-radius:50%;padding:0;border:3px solid #fff;box-shadow:0 0 0 1px var(--bd)}
+.mu{color:var(--mu);font-size:.85rem}.c{text-align:center}.late{color:var(--red)}
+.it{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--bd)}.it:last-child{border:0}
+.it.d .tt{text-decoration:line-through;color:var(--mu)}.tt{flex:1}
+input[type=checkbox]{width:22px;height:22px;accent-color:var(--ac);flex:none;padding:0}
+.x{border:0;background:none;color:var(--mu);padding:2px 6px}
+.bar{height:12px;background:var(--bd);border-radius:8px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .6s}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.days button{padding:4px 2px;font-size:.7rem;line-height:1.4}
+.st{display:flex;gap:8px}.st div{flex:1;text-align:center}.st strong{display:block;font-size:1.2rem;color:var(--ac)}
+.big{text-align:center;font-size:2rem;font-weight:800;color:var(--ac)}
+.wr{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.hist{display:flex;gap:6px;align-items:flex-end;height:80px;margin-top:8px}
+.hist div{flex:1;text-align:center;font-size:.7rem;color:var(--mu);display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.hist i{display:block;background:linear-gradient(180deg,var(--ac2),var(--ac));border-radius:6px 6px 0 0;min-height:3px;transition:height .6s}
+.ban{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:14px;padding:8px 12px;margin:8px 0}
+.empty{text-align:center;padding:16px 0;color:var(--mu)}.eb{font-size:2.2rem;animation:bob 2s ease-in-out infinite}
+.drop{min-height:90px;border-radius:18px;transition:outline .2s}
+body.dragging .drop{outline:2px dashed var(--ac2);outline-offset:4px}.drop.hot{outline:3px dashed var(--ac)}
+.ghost{position:fixed;z-index:99;pointer-events:none;transform:translate(-50%,-50%);padding:8px 14px;border-radius:14px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:50;padding:20px}
+.mc{width:100%;max-width:380px;background:#fff}.em{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg"><i></i><i></i><i></i></div>
+<div class="w">
+<div class="top"><h1 id="ttl">پنل شخصی من</h1><div><button class="dot" style="background:#e91e8c" onclick="setTheme('pink')" aria-label="صورتی"></button> <button class="dot" style="background:#0b84d8" onclick="setTheme('blue')" aria-label="آبی"></button></div></div>
+<div class="nav" id="nav"></div>
+<div class="card" id="wk"></div>
+<div id="view"></div>
+</div>
+<div id="modal"></div>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const K="my_panel_v1";let S={};try{S=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+const day=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const parse=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+const TODAY=day(new Date()),fa=(d,o)=>parse(d).toLocaleDateString("fa-IR",o||{month:"long",day:"numeric"});
+const uid=()=>Date.now()+Math.floor(Math.random()*1e4);
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const WD=["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
+const TY=["🦵 پا","🫁 سینه","🏋️ پشت","💪 دست","🏔 شانه","🔥 فول‌بادی","🏃 کاردیو","🧘 استراحت"];
+const EM=["⭐","📚","🎯","🏠","💼","🎓","🛍","🧘"];
+const E=(n,s,r)=>({id:uid(),n,s,r});
+S.theme=S.theme||"blue";S.pins=S.pins||["meet","water","study"];S.meets=S.meets||[];S.water=S.water||{};S.goal=S.goal||3000;S.wk=S.wk||{};
+S.menus=S.menus||[{id:"gym",n:"تمرین",i:"🏋️",ty:"gym"},{id:"water",n:"آب",i:"💧",ty:"water"},{id:"study",n:"آموزش",i:"🎓",ty:"study"},{id:"tasks",n:"کارها",i:"✅",ty:"list"},{id:"shop",n:"خرید",i:"🛒",ty:"list",nd:1},{id:"meet",n:"میتینگ",i:"📅",ty:"meet"}];
+S.lists=S.lists||{tasks:[],shop:[],study:[]};
+S.plan=S.plan||[
+{t:"🦵 پا",ex:[E("اسکات",4,"10"),E("پرس پا",3,"12"),E("لانج",3,"12"),E("ساق پا",4,"15")]},
+{t:"🫁 سینه",ex:[E("پرس سینه هالتر",4,"8"),E("پرس بالا سینه دمبل",3,"10"),E("فلای",3,"12")]},
+{t:"🏋️ پشت",ex:[E("لت پول‌داون",4,"10"),E("روئینگ",3,"10"),E("جلو بازو هالتر",3,"12")]},
+{t:"🧘 استراحت",ex:[]},
+{t:"🏔 شانه",ex:[E("پرس سرشانه",4,"8"),E("نشر جانب",4,"12"),E("نشر خم",3,"12")]},
+{t:"💪 دست",ex:[E("جلو بازو هالتر",4,"10"),E("پشت بازو سیم‌کش",4,"12"),E("جلو بازو چکشی",3,"12")]},
+{t:"🏃 کاردیو",ex:[E("دویدن یا دوچرخه",1,"30 دقیقه")]}];
+if((S.v||0)<2){S.theme="blue";if(!S.menus.some(m=>m.id=="study"))S.menus.splice(2,0,{id:"study",n:"آموزش",i:"🎓",ty:"study"});S.lists.study=S.lists.study||[];if(!S.pins.includes("study"))S.pins.push("study");S.v=2}
+let tab="home",SD=TODAY,WO=0,FX=0,NE="⭐",DR=null,noClick=0;
+const EMPTY=`<div class="empty"><div class="eb">📭</div><b>خالیه</b><div class="mu">هنوز چیزی اضافه نشده</div></div>`;
+const menu=id=>S.menus.find(m=>m.id==id);
+function wkDates(){const i=(new Date().getDay()+1)%7;return [0,1,2,3,4,5,6].map(k=>{const x=new Date();x.setDate(x.getDate()-i+k+7*WO);return day(x)})}
+const selI=()=>Math.max(0,wkDates().indexOf(SD)),dateOf=w=>wkDates()[w];
+const cnt=d=>S.meets.filter(m=>m.date==d&&!m.d).length+Object.values(S.lists).reduce((a,l)=>a+l.filter(x=>!x.d&&x.due==d).length,0);
+function out(e,fn){e.preventDefault();const el=e.target.closest(".it");if(el)el.classList.add("out");setTimeout(fn,200)}
+function go(t){tab=t;draw(1)}
+function setTheme(t){S.theme=t;save();draw()}
+function pinOf(id){return S.pins.includes(id)}
+
+/* لیست‌های عمومی */
+function rList(m){const a=[...(S.lists[m.id]||[])].sort((x,y)=>x.d-y.d);
+ return (a.length?a.map(x=>`<label class="it ${x.d?"d":""} ${FX==x.id?"pop":""}"><input type="checkbox" ${x.d?"checked":""} onchange="tgI('${m.id}',${x.id})"><div class="tt">${esc(x.t)}${x.due?`<div class="mu ${!x.d&&x.due<TODAY?"late":""}">📆 ${fa(x.due)}</div>`:""}</div><button class="x" onclick="rmI('${m.id}',${x.id},event)">✕</button></label>`).join(""):EMPTY)+
+ `<div class="add"><input type="text" id="in-${m.id}" placeholder="مورد جدید…" onkeydown="if(event.key==='Enter')addI('${m.id}')">${m.nd?"":`<input type="date" id="dt-${m.id}" value="${SD}">`}<button class="on" onclick="addI('${m.id}')">افزودن</button></div>`+
+ (a.some(x=>x.d)?`<div class="mu" style="margin-top:8px"><button onclick="clrI('${m.id}')">پاک‌کردن انجام‌شده‌ها</button></div>`:"")}
+function addI(id){const t=$("in-"+id).value.trim();if(!t)return;const x={id:uid(),t,due:$("dt-"+id)?$("dt-"+id).value:"",d:0};S.lists[id].push(x);FX=x.id;save();draw()}
+function tgI(id,i){const x=S.lists[id].find(v=>v.id==i);x.d=x.d?0:1;FX=i;save();draw()}
+function rmI(id,i,e){out(e,()=>{S.lists[id]=S.lists[id].filter(v=>v.id!=i);save();draw()})}
+function clrI(id){S.lists[id]=S.lists[id].filter(v=>!v.d);save();draw()}
+
+/* میتینگ */
+function rMeet(){const a=[...S.meets].sort((x,y)=>(x.d-y.d)||((x.date+x.time)>(y.date+y.time)?1:-1));
+ return (a.length?a.map(m=>`<label class="it ${m.d?"d":""} ${FX==m.id?"pop":""}"><input type="checkbox" ${m.d?"checked":""} onchange="tgM(${m.id})"><div class="tt">${esc(m.t)}<div class="mu ${m.date<TODAY&&!m.d?"late":""}">${m.date==TODAY?"امروز":fa(m.date)}${m.time?" · ⏰ "+m.time:""}</div></div><button class="x" onclick="rmM(${m.id},event)">✕</button></label>`).join(""):EMPTY)+
+ `<div class="add"><input type="text" id="mt" placeholder="عنوان میتینگ…"><input type="date" id="md" value="${SD}"><input type="time" id="mh"><button class="on" onclick="addM()">افزودن</button></div>`}
+function addM(){const t=$("mt").value.trim();if(!t)return;const m={id:uid(),t,date:$("md").value||SD,time:$("mh").value,d:0};S.meets.push(m);FX=m.id;save();draw()}
+function tgM(i){const m=S.meets.find(v=>v.id==i);m.d=m.d?0:1;FX=i;save();draw()}
+function rmM(i,e){out(e,()=>{S.meets=S.meets.filter(v=>v.id!=i);save();draw()})}
+
+/* آب */
+const wv=d=>S.water[d]||0;
+function addW(n){S.water[SD]=Math.max(0,wv(SD)+n);save();draw()}
+function setGoal(){const g=+prompt("هدف روزانه (میلی‌لیتر):",S.goal);if(g>0){S.goal=g;save();draw()}}
+function rWater(){const v=wv(SD),pc=Math.min(100,Math.round(v/S.goal*100)),ds=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);ds.push(day(d))}
+ return `<div class="mu c">${SD==TODAY?"امروز":fa(SD)} چقدر آب خوردی؟</div><div class="big">${(v/1000).toFixed(2)} لیتر</div><div class="mu c">هدف ${(S.goal/1000).toFixed(1)} لیتر (${pc}٪) · ${Math.round(v/250)} لیوان</div><div class="bar"><i style="width:${pc}%"></i></div>
+ <div class="wr"><button onclick="addW(-250)">− لیوان</button><button class="on" onclick="addW(250)">+ لیوان</button><button class="on" onclick="addW(500)">+ بطری</button><button onclick="setGoal()">هدف</button></div>
+ <div class="hist">${ds.map(d=>`<div><i style="height:${Math.min(100,wv(d)/S.goal*100)}%"></i>${(wv(d)/1000).toFixed(1)}</div>`).join("")}</div>`}
+
+/* تمرین */
+const done=(d,id)=>((S.wk[d]||{})[id])||0;
+const prog=w=>{const ex=S.plan[w].ex,d=dateOf(w);return[ex.filter(e=>done(d,e.id)).length,ex.length]};
+function setType(v){S.plan[selI()].t=v;save();draw()}
+function tickEx(id,v){const d=dateOf(selI());S.wk[d]=S.wk[d]||{};S.wk[d][id]=v?1:0;FX=id;save();draw()}
+function addEx(){const n=$("en").value.trim();if(!n)return;const e=E(n,+$("es").value||1,$("er").value||"10");S.plan[selI()].ex.push(e);FX=e.id;save();draw()}
+function rmEx(id,e){out(e,()=>{const p=S.plan[selI()];p.ex=p.ex.filter(x=>x.id!=id);save();draw()})}
+function rGym(){const i=selI(),p=S.plan[i],d=dateOf(i),[a,b]=prog(i);
+ return `<div class="row"><b>${WD[i]}</b><select onchange="setType(this.value)">${TY.map(t=>`<option ${t==p.t?"selected":""}>${t}</option>`).join("")}</select></div>`+
+ (b?`<div class="bar"><i style="width:${a/b*100}%"></i></div><div class="mu">${a} از ${b} حرکت انجام شد</div>`+p.ex.map(e=>`<label class="it ${done(d,e.id)?"d":""} ${FX==e.id?"pop":""}"><input type="checkbox" ${done(d,e.id)?"checked":""} onchange="tickEx(${e.id},this.checked)"><div class="tt"><b>${esc(e.n)}</b><div class="mu">${e.s>1?e.s+" ست × ":""}${esc(e.r)}</div></div><button class="x" onclick="rmEx(${e.id},event)">✕</button></label>`).join(""):EMPTY)+
+ `<div class="add"><input type="text" id="en" placeholder="نام حرکت…"><input type="number" id="es" min="1" value="3" style="width:64px"><input type="text" id="er" value="10" style="width:90px"><button class="on" onclick="addEx()">افزودن</button></div>`}
+
+/* آموزش */
+S.slog=S.slog||{};S.sgoal=S.sgoal||240;
+const sl=d=>S.slog[d]||[],sm=d=>sl(d).reduce((a,x)=>a+x.m,0),hh=m=>(m/60).toFixed(1);
+function addS(m){const s=$("ss").value.trim()||"مطالعه",mm=m||+$("sm").value;if(!mm)return;const x={id:uid(),s,m:mm};(S.slog[SD]=S.slog[SD]||[]).push(x);FX=x.id;save();draw()}
+function rmS(i,e){out(e,()=>{S.slog[SD]=sl(SD).filter(x=>x.id!=i);save();draw()})}
+function setSG(){const g=+prompt("هدف روزانه مطالعه (ساعت):",S.sgoal/60);if(g>0){S.sgoal=Math.round(g*60);save();draw()}}
+function rStudy(){const t=sm(SD),pc=Math.min(100,Math.round(t/S.sgoal*100)),ds=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);ds.push(day(d))}
+ return `<div class="mu c">${SD==TODAY?"امروز":fa(SD)} چند ساعت مطالعه کردی؟</div><div class="big">${hh(t)} ساعت</div><div class="mu c">هدف ${hh(S.sgoal)} ساعت (${pc}٪)</div><div class="bar"><i style="width:${pc}%"></i></div>
+ <div class="wr"><button class="on" onclick="addS(30)">+ ۳۰ دقیقه</button><button class="on" onclick="addS(60)">+ ۱ ساعت</button><button onclick="setSG()">هدف</button></div>
+ ${sl(SD).length?sl(SD).map(x=>`<label class="it ${FX==x.id?"pop":""}"><div class="tt">${esc(x.s)}<div class="mu">${x.m} دقیقه</div></div><button class="x" onclick="rmS(${x.id},event)">✕</button></label>`).join(""):EMPTY}
+ <div class="add"><input type="text" id="ss" placeholder="موضوع (مثلاً مقاله)"><input type="number" id="sm" min="1" placeholder="دقیقه" style="width:80px"><button class="on" onclick="addS()">ثبت</button></div>
+ <div class="hist">${ds.map(d=>`<div><i style="height:${Math.min(100,sm(d)/S.sgoal*100)}%"></i>${hh(sm(d))}</div>`).join("")}</div>
+ <h3 style="margin-top:14px">📝 کارهای درسی</h3>`+rList(menu("study"))}
+const body=m=>m.ty=="gym"?rGym():m.ty=="water"?rWater():m.ty=="study"?rStudy():m.ty=="meet"?rMeet():rList(m);
+
+/* خانه */
+function homeH(){const n=new Date(),hr=n.getHours()+n.getMinutes()/60,v=wv(SD);let ban="";
+ if(SD==TODAY&&hr>=8&&hr<=22){const e=Math.round((hr-8)/14*S.goal/250)*250;if(v<e-250)ban=`<div class="ban">💧 تا الان باید حدود ${(e/1000).toFixed(1)} لیتر می‌خوردی، الان ${(v/1000).toFixed(2)} لیتر.</div>`}
+ const open=Object.values(S.lists).reduce((a,l)=>a+l.filter(x=>!x.d).length,0),mt=S.meets.filter(m=>m.date==SD&&!m.d).length;
+ const pins=S.pins.map(menu).filter(Boolean);
+ return `<div class="card st"><div><strong>${open}</strong><span class="mu">کار باز</span></div><div><strong>${(v/1000).toFixed(1)}L</strong><span class="mu">آب</span></div><div><strong>${hh(sm(SD))}</strong><span class="mu">ساعت مطالعه</span></div><div><strong>${mt}</strong><span class="mu">میتینگ</span></div></div>${ban}
+ <div id="drop" class="drop">${pins.length?pins.map(m=>`<div class="card ${FX==m.id?"pop":""}"><div class="row"><h3>${m.i} ${esc(m.n)}</h3><button class="x" onclick="unpin('${m.id}')">✕</button></div>${body(m)}</div>`).join(""):`<div class="card">${EMPTY}</div>`}</div>
+ <div class="mu c">منوی بالا را بکش و اینجا رها کن تا به صفحه خانه اضافه شود</div>`}
+function pin(id){if(!pinOf(id))S.pins.unshift(id);FX=id;save();draw()}
+function unpin(id){S.pins=S.pins.filter(x=>x!=id);save();draw()}
+
+/* منوی جدید */
+function openAdd(){$("modal").innerHTML=`<div class="ov" onclick="if(event.target===this)closeM()"><div class="card pop mc"><h3>＋ منوی جدید</h3><input type="text" id="nn" placeholder="اسم منو (مثلاً کتاب‌ها)" style="width:100%;margin-top:10px" onkeydown="if(event.key==='Enter')mkMenu()"><div class="em">${EM.map(e=>`<button class="${e==NE?"on":""}" onclick="pickE(this,'${e}')">${e}</button>`).join("")}</div><div class="add"><button class="on" onclick="mkMenu()">ساخت منو</button><button onclick="closeM()">بستن</button></div></div></div>`;$("nn").focus()}
+function pickE(b,e){NE=e;b.parentNode.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on")}
+function closeM(){$("modal").innerHTML=""}
+function mkMenu(){const n=$("nn").value.trim();if(!n){$("nn").style.borderColor="var(--red)";return}const id="m"+uid();S.menus.push({id,n,i:NE,ty:"list"});S.lists[id]=[];S.pins.unshift(id);tab=id;closeM();save();draw(1)}
+function rmMenu(id){S.menus=S.menus.filter(m=>m.id!=id);delete S.lists[id];S.pins=S.pins.filter(x=>x!=id);tab="home";save();draw(1)}
+
+/* درگ و دراپ */
+function pd(e,id){DR={id,x:e.clientX,y:e.clientY,on:0,el:e.currentTarget};e.currentTarget.setPointerCapture(e.pointerId)}
+function hit(e){const t=document.elementFromPoint(e.clientX,e.clientY);return t&&t.closest("#drop,[data-id=home]")}
+function pm(e){if(!DR)return;if(!DR.on&&Math.hypot(e.clientX-DR.x,e.clientY-DR.y)>10){DR.on=1;DR.g=document.createElement("div");DR.g.className="ghost";DR.g.textContent=DR.el.textContent;document.body.appendChild(DR.g);document.body.classList.add("dragging")}
+ if(DR.on){DR.g.style.left=e.clientX+"px";DR.g.style.top=e.clientY+"px";const z=$("drop");if(z)z.classList.toggle("hot",!!hit(e))}}
+function pu(e){if(!DR)return;if(DR.on){noClick=1;setTimeout(()=>noClick=0,80);DR.g.remove();document.body.classList.remove("dragging");const z=$("drop");if(z)z.classList.remove("hot");if(hit(e))pin(DR.id)}DR=null}
+
+/* رندر */
+function draw(a){
+ document.documentElement.dataset.theme=S.theme;
+ $("ttl").textContent="پنل شخصی من";
+ $("nav").innerHTML=`<button class="nv ${tab=="home"?"on":""}" data-id="home" onclick="go('home')">🏠 خانه</button>`+S.menus.map(m=>`<button class="nv ${tab==m.id?"on":""}" onpointerdown="pd(event,'${m.id}')" onpointermove="pm(event)" onpointerup="pu(event)" onpointercancel="DR=null" onclick="if(!noClick)go('${m.id}')">${m.i} ${esc(m.n)}</button>`).join("")+`<button class="nv" onclick="openAdd()">＋ اضافه کردن</button>`;
+ const ds=wkDates();
+ $("wk").innerHTML=`<div class="row"><button onclick="wkGo(-1)">هفته قبل</button><b>${fa(ds[0])} تا ${fa(ds[6])}</b><button onclick="wkGo(1)">هفته بعد</button></div><div class="days" style="margin-top:8px">${ds.map((d,k)=>`<button class="${d==SD?"on":""}" onclick="pickD('${d}')">${WD[k]}<br>${fa(d,{day:"numeric"})}<br>${S.plan[k].t.split(" ")[0]}<br>${cnt(d)?"● "+cnt(d):"·"}${d==TODAY?" ⭐":""}</button>`).join("")}</div>`;
+ const v=$("view"),m=tab=="home"?null:menu(tab);
+ v.innerHTML=m?`<div class="card"><div class="row"><h3>${m.i} ${esc(m.n)}</h3>${m.ty=="list"?`<button class="x" onclick="rmMenu('${m.id}')">🗑 حذف منو</button>`:""}</div>${body(m)}</div>`:homeH();
+ if(a){v.classList.remove("enter");void v.offsetWidth;v.classList.add("enter")}
+ FX=0;
+}
+function pickD(d){SD=d;draw()}
+function wkGo(n){const k=selI();WO+=n;SD=wkDates()[k];draw()}
+draw(1);
+</script>
+</body>
+</html>
